@@ -1,14 +1,16 @@
 import React from "react";
 
-export const initialValue = 0;
-
 const Counter: React.FunctionComponent = () => {
-  const [count, setCount] = React.useState(initialValue);
+  const [count, setCount] = React.useState(0);
 
   return (
     <div>
-      <h1>Counter</h1>
-      <p>Count: {count}</p>
+      <section>
+        <h1>Counter</h1>
+        <p>Count: {count}</p>
+      </section>
+      <section>Hello World</section>
+      <div>We already have 100 users!</div>
       <button onClick={() => setCount((prevCount) => prevCount + 1)}>
         Increment
       </button>

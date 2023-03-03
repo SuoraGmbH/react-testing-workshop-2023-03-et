@@ -1,6 +1,7 @@
 import { Header, Main } from "../component/Layout";
 import React from "react";
 import Greeting from "./Home/Greeting";
+import Counter from "./Home/Counter";
 
 const Home: React.FunctionComponent = () => {
   return (
@@ -8,6 +9,7 @@ const Home: React.FunctionComponent = () => {
       <Header>Welcome</Header>
       <Main>
         <Greeting />
+          <Counter />
       </Main>
     </>
   );
