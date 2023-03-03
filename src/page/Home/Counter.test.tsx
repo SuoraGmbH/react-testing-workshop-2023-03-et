@@ -44,3 +44,17 @@ it("should display a 1 after clicking the button once", async () => {
 
   expect(screen.getByText(/1/)).toBeInTheDocument();
 });
+
+it("should display a 20 after clicking the button 20 times", async () => {
+  render(<Counter />);
+
+  const incrementButton = screen.getByRole("button", {
+    name: /increment/i,
+  });
+
+  for (let i = 0; i < 20; i++) {
+    await userEvent.click(incrementButton);
+  }
+
+  expect(screen.getByText(/20/)).toBeInTheDocument();
+});
