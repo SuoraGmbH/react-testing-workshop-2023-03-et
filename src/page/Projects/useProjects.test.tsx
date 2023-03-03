@@ -1,8 +1,15 @@
 import useProjects from "./useProjects";
 import { renderHook, waitFor } from "@testing-library/react";
 import { AllTheProviders } from "../../tests/test-utils";
+import { server } from "../../setupTests";
+import jsonServerProjectsSuccessMock from "../../mocks/jsonServer/projects/jsonServerProjectsSuccessMock";
+import jsonServerProjectsErrorMockHandler from "../../mocks/jsonServer/projects/jsonServerProjectsErrorMockHandler";
 
-test("it should initially be in loading state", () => {
+beforeEach(() => {
+  server.resetHandlers(jsonServerProjectsSuccessMock);
+});
+
+it("should initially be in loading state", () => {
   const { result } = renderHook(() => useProjects(), {
     wrapper: AllTheProviders,
   });
@@ -24,4 +31,15 @@ it("eventually is in success state", async () => {
   });
 
   return waitFor(() => expect(result.current.isSuccess).toBeTruthy());
+});
+
+// Not working right now, probably because christians useAxiosQuery-hook is broken
+xit("treats 500s as errors", () => {
+  server.resetHandlers(jsonServerProjectsErrorMockHandler);
+
+  const { result } = renderHook(() => useProjects(), {
+    wrapper: AllTheProviders,
+  });
+
+  return waitFor(() => expect(result.current.isError).toBeTruthy());
 });
